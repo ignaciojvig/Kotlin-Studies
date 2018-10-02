@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_kotlinlearnings" default="compile.module.kotlinlearnings">
+  <dirname property="module.kotlinlearnings.basedir" file="${ant.file.module_kotlinlearnings}"/>
+  
+  <property name="module.jdk.home.kotlinlearnings" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.kotlinlearnings" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.kotlinlearnings" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.kotlinlearnings" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="kotlinlearnings.output.dir" value="${module.kotlinlearnings.basedir}/../../out/production/KotlinLearnings"/>
+  <property name="kotlinlearnings.testoutput.dir" value="${module.kotlinlearnings.basedir}/../../out/test/KotlinLearnings"/>
+  
+  <path id="kotlinlearnings.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="kotlinlearnings.module.production.classpath">
+    <path refid="${module.jdk.classpath.kotlinlearnings}"/>
+  </path>
+  
+  <path id="kotlinlearnings.runtime.production.module.classpath">
+    <pathelement location="${kotlinlearnings.output.dir}"/>
+  </path>
+  
+  <path id="kotlinlearnings.module.classpath">
+    <path refid="${module.jdk.classpath.kotlinlearnings}"/>
+    <pathelement location="${kotlinlearnings.output.dir}"/>
+  </path>
+  
+  <path id="kotlinlearnings.runtime.module.classpath">
+    <pathelement location="${kotlinlearnings.testoutput.dir}"/>
+    <pathelement location="${kotlinlearnings.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.kotlinlearnings">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.kotlinlearnings">
+    <patternset refid="excluded.from.module.kotlinlearnings"/>
+  </patternset>
+  
+  
+  <target name="compile.module.kotlinlearnings" depends="compile.module.kotlinlearnings.production,compile.module.kotlinlearnings.tests" description="Compile module KotlinLearnings"/>
+  
+  <target name="compile.module.kotlinlearnings.production" depends="register.custom.compilers" description="Compile module KotlinLearnings; production classes"/>
+  
+  <target name="compile.module.kotlinlearnings.tests" depends="register.custom.compilers,compile.module.kotlinlearnings.production" description="compile module KotlinLearnings; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.kotlinlearnings" description="cleanup module">
+    <delete dir="${kotlinlearnings.output.dir}"/>
+    <delete dir="${kotlinlearnings.testoutput.dir}"/>
+  </target>
+</project>
